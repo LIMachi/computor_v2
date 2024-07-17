@@ -17,16 +17,10 @@ fn label() -> impl Fn(StringReader) -> ParserOut<String> {
 }
 
 fn dynamic_var_func_parser_v2() -> impl Fn(StringReader) -> ParserOut<(String, usize)> {
-    delimited(
-        "func(",
-        label(),
-        ")"
-    ).and_then(|input, label| {
-        preceded((
-            white,
-            "=",
-            white
-        ), separated_pair(label.case_insensitive(), (white, "^", white), unsigned.map_ok(|i| i as usize)))(input)
+    delimited("func(", label(), ")")
+    .and_then(|input, label| {
+        preceded((white, "=", white),
+            separated_pair(label.case_insensitive(), (white, "^", white), unsigned.map_ok(|i| i as usize)))(input)
     })
 }
 
