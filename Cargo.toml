@@ -1,0 +1,14 @@
+[package]
+name = "computor"
+version = "0.1.0"
+edition = "2021"
+
+[profile.test]
+opt-level = 0
+debug = true
+
+[features]
+std-sqrt = []
+
+[dependencies]
+parser = { path = "../computor_v1/parser" }
